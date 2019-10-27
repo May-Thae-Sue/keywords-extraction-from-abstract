@@ -1,47 +1,40 @@
 import nltk
 import re
+import sys
 import json
 #to download all nltk.data
-nltk.download('all')
+#nltk.download('all')
+
+#Note: if this file is run first time, nltk.download('all') line is needed to comment out.
+
+# Usage: python3 example.py "book_title" "book_abstract"
 
 pairs = ""
-filtered_output = []
 output = {}
-with open('book.json', 'r') as input_file:
-	data = json.load(input_file)
+
+title = sys.argv[1]
+abstract = sys.argv[2]
 	
-	title = [x for x in data]
-	book_title = str(title)
-	book_title = book_title.lower()
-	book_title = book_title.replace("['","")
-	book_title = book_title.replace("']","")
-	#print(book_title)
+book_title = str(title)
+book_title = book_title.lower()
 
-	abstract = [data[x] for x in data]
-	book_stract = str(abstract)
-	book_stract = book_stract.lower()
-	book_stract = book_stract.replace("['","")
-	book_stract = book_stract.replace("']","")
-#	print("THIS IS ABSTRACT")
-	print(abstract)
+book_stract = str(abstract)
+book_stract = book_stract.lower()
+print(abstract)
 
-	input_string = nltk.word_tokenize(book_stract)
-	#print(input_string)
+input_string = nltk.word_tokenize(book_stract)
 
-	tagged = nltk.pos_tag(input_string)
-#	print("THIS IS TAG")
-	print(tagged)
+tagged = nltk.pos_tag(input_string)
+print(tagged)
 
-	output[book_title] = []
-	for tagged_pairs in tagged:
-		pairs= pairs.join(tagged_pairs)
-		pattern = r'(^.*NN$)|(^.*NNS$)|(^.*NNP$)|(^.*NNPS$)|(^.*JJ$)|(^.*JJR$)|(^.*JJS$)'
-		match =  re.match(pattern,pairs, re.I)
-		if match:
-			output[book_title].append(tagged_pairs[0])
-		pairs = ""
-
+output["abstract"] = []
+for word,tag in enumerate(tagged):
+	if tag[1] == "NN" or tag[1] == "NNS" or tag[1] == "NNP" or tag[1] == "NNPS" or tag[1] == "JJ" or tag[1] == "JJR" or tag[1] == "JJS":
+		print(tag[0])
+		output["title"] = book_title
+		output["abstract"].append(tag[0])
+print("\n")
+print(output)
 with open('keyword.json', 'w') as outfile:
     json.dump(output, outfile)
-
 
