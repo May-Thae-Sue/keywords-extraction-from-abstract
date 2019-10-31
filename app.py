@@ -3,15 +3,16 @@ import nltk
 app = Flask(__name__)
 
 output = []
+
 @app.route('/',methods=['POST'])
 def extract():
 	data = request.get_json()
 	nltk.data.path.append('./nltk_data/')
 	title = data['title']
 	abstract = data['abstract']
-	
+
 	book_title = title.lower()
-	
+
 	book_stract = abstract.lower()
 
 	input_string = nltk.word_tokenize(book_stract)
