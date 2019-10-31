@@ -3,7 +3,7 @@ import re
 import sys
 import json
 #to download all nltk.data
-#nltk.download('all')
+# nltk.download('all')
 
 #Note: if this file is run first time, nltk.download('all') line is needed to comment out.
 
@@ -14,7 +14,7 @@ output = {}
 
 title = sys.argv[1]
 abstract = sys.argv[2]
-	
+
 book_title = str(title)
 book_title = book_title.lower()
 
