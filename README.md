@@ -8,7 +8,7 @@ To run example.py
 
 1. open command line, type the following command,
 
-  **python3 example.py "book_title" "book_abstract"
+  python3 example.py "book_title" "book_abstract"
 
 Note: Extract_keyword.py is built using Flask
 
@@ -17,7 +17,7 @@ Note: Extract_keyword.py is built using Flask
 To run Extract_keyword.py
 
 1. open command line:
-   **Type "python3 Extract_keyword.py"
+   **Type "python3 Extract_keyword.py"**
    
    After running this command: the result will be as the following
    
