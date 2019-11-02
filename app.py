@@ -4,9 +4,13 @@ app = Flask(__name__)
 
 output = []
 
-@app.route('/',methods=['POST'])
+@app.route('/')
+def hello():
+    return 'hello world'
+
+@app.route('/extract-keywords',methods=['POST'])
 def extract():
-	data = request.get_json()
+	data = request.get_json(force=True)
 	nltk.data.path.append('./nltk_data/')
 	title = data['title']
 	abstract = data['abstract']
